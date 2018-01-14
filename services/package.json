@@ -1,0 +1,16 @@
+{
+  "name": "bownyac-services",
+  "version": "0.0.1",
+  "description": "Services for the new application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm test"
+  },
+  "author": "Jeremy Billay",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.4.1",
+    "mongodb": "^3.0.1"
+  }
+}

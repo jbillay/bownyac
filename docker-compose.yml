@@ -1,0 +1,26 @@
+version: '3'
+services:
+  bownyac-session:
+    image: redis
+    healthcheck:
+      test: exit 0
+  bownyac-bd:
+    build: ./db/
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - "dbdata:/data/db"
+    healthcheck:
+      test: exit 0
+  bownyac-services:
+    build: ./services/
+    depends_on:
+      - bownyac-session
+      - bownyac-bd
+    links:
+      - bownyac-bd
+      - bownyac-session
+volumes:
+  dbdata:
+    driver: local
