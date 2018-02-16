@@ -5,8 +5,8 @@ const config = {
   port: 4242,
   env: "development",
   db: {
-    url: "mongodb://bownyac-db:27017",
-    dbname: "bownyac"
+    server: "mongodb://bownyac-db:27017",
+    dbName: "bownyac"
   }
 };
 

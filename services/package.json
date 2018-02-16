@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "npm test"
+    "test": "mocha test"
   },
   "author": "Jeremy Billay",
   "license": "MIT",
   "dependencies": {
     "koa": "^2.4.1",
-    "mongodb": "^3.0.1"
+    "mongodb": "^3.0.1",
+    "mongoose": "^5.0.6"
   }
 }

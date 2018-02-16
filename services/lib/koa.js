@@ -1,10 +1,20 @@
+const debug = require('debug')('services:server:koa');
 const Koa = require('koa');
-const app = new Koa();
+const dbConnect = require('./db.js');
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+const create = async function (config) {
+  const app = new Koa();
+  const db = await dbConnect.connect(config.db.server, config.db.dbName);
 
-app.listen(3000);
+  app.use(async ctx => {
+    ctx.body = 'Hello World';
+  });
 
-module.exports = app;
+  app.listen(3000);
+
+  return app;
+};
+
+module.exports = {
+  create: create
+};
