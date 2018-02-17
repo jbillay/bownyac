@@ -1,28 +1,26 @@
 const debug = require('debug')('services:server:db');
 const mongoose = require('mongoose');
 
-const connect = async function(server, dbName) {
+const connect = async function connect(server, dbName) {
   try {
     const url = `${server}/${dbName}`;
     const db = await mongoose.connect(url);
-  } catch(err) {
+    return db;
+  } catch (err) {
     debug(`Unable to connect to the database: ${err}`);
     process.exit(0);
   }
+  return null;
 };
 
-const createSchema = function(name, content) {
+const createSchema = async function createSchema(name, content) {
   const schema = mongoose.Schema(content);
   return schema;
 };
 
-const enrichModel = function(name, schemaObject) {
-  const model = mongoose.model('${name}', kittySchema);
+const enrichModel = async function enrichModel(name, schemaObject) {
+  const model = mongoose.model(`${name}`, schemaObject);
   return model;
 };
 
-module.exports = {
-  connect: connect,
-  createSchema: createSchema,
-  enrichModel: enrichModel
-};
+module.exports = { connect, createSchema, enrichModel };

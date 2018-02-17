@@ -1,12 +1,10 @@
 const https = require('https');
 const fs = require('fs');
-const debug = require('debug')('services:server');
 const config = require('./config/');
+const debug = require('debug')('services:server');
 const koaApp = require('./lib/koa');
 
-debug(config);
-
-async function run(config) {
+const start = async function (config) {
   const app = await koaApp.create(config);
   const options = {
     key: fs.readFileSync(`${config.path}/certs/bownyac-key.pem`),
@@ -16,6 +14,8 @@ async function run(config) {
   };
 
   const server = https.createServer(options, app.callback()).listen(config.port);
-}
+};
 
-run(config).catch(error => console.error(error.stack));
+start(config)
+  .then((server) => console.log('Server started'))
+  .catch((error) => console.error('Server not started'));

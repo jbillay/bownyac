@@ -1,20 +1,19 @@
-const debug = require('debug')('services:server:koa');
 const Koa = require('koa');
+const KoaRouter = require('koa-route');
 const dbConnect = require('./db.js');
 
-const create = async function (config) {
+const create = async function create(config) {
   const app = new Koa();
-  const db = await dbConnect.connect(config.db.server, config.db.dbName);
+  app.context.db = await dbConnect.connect(config.db.server, config.db.dbName);
 
-  app.use(async ctx => {
-    ctx.body = 'Hello World';
-  });
-
-  app.listen(3000);
+  // TODO: Remove that test
+  app.use(KoaRouter.get('/', async (ctx) => {
+    ctx.body = {
+      data: 'Hello World',
+    };
+  }));
 
   return app;
 };
 
-module.exports = {
-  create: create
-};
+module.exports = { create };
