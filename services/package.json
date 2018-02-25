@@ -8,12 +8,32 @@
     "url": "https://github.com/jbillay/bownyac.git"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint **/*.js --ignore-pattern node_modules/"
+    "prestart": "./node_modules/.bin/eslint **/*.js"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!index.js",
+      "!**/node_modules/**",
+      "!**/config/**",
+      "!**/.config/**",
+      "!**/coverage/**",
+      "!**/test/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["json", "lcov", "text", "html"]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*",
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2500"
   },
   "author": "Jeremy Billay",
   "license": "MIT",
@@ -29,6 +49,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jest": "^22.3.0",
+    "nodemon": "^1.15.1",
     "supertest": "^3.0.0"
   }
 }

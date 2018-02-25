@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   bownyac-session:
     container_name: bownyac-session
@@ -18,6 +18,13 @@ services:
   bownyac-services:
     container_name: bownyac-services
     build: ./services/
+    volumes:
+      - type: bind
+        source: ./services
+        target: /home/app
+      - type: bind
+        source: ./services/package.json
+        target: /home/app/package.json
     depends_on:
       - bownyac-session
       - bownyac-bd
@@ -27,7 +34,7 @@ services:
     ports:
       - '4242:4242' # expose ports - HOST:CONTAINER
     environment:
-      - DEBUG=*
+      - DEBUG=services:*
 volumes:
   dbdata:
     driver: local
