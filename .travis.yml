@@ -3,10 +3,10 @@ services:
   - docker
 
 script:
-  - docker-compose build
-  - docker-compose up -d
+  - docker-compose -p bownyac build
+  - docker-compose -p bownyac up -d
   - docker ps -a
-  - docker-compose run bownyac-services npm test
+  - docker-compose exec bownyac-services npm test
 
 env: DOCKER_COMPOSE_VERSION=1.18.0
 before_install:

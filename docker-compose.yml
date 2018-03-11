@@ -19,12 +19,8 @@ services:
     container_name: bownyac-services
     build: ./services/
     volumes:
-      - type: bind
-        source: ./services
-        target: /home/app
-      - type: bind
-        source: ./services/package.json
-        target: /home/app/package.json
+      - ./services:/home/app/services
+      - /home/app/services/node_modules
     depends_on:
       - bownyac-session
       - bownyac-bd
@@ -35,6 +31,7 @@ services:
       - '4242:4242' # expose ports - HOST:CONTAINER
     environment:
       - DEBUG=services:*
+      - NODE_ENVdevelopment
 volumes:
   dbdata:
     driver: local

@@ -6,23 +6,20 @@ RUN apk add --no-cache make gcc g++ python
 RUN addgroup app
 RUN adduser app -S /bin/false -h /home/app -G app
 
-ENV HOME=/home/app/
+RUN npm install --global npm
 
-# Install app dependencies
-COPY package.json $HOME
-RUN chown -R app:app $HOME
+ENV HOME=/home/app
+
+COPY package.json npm-shrinkwrap.json $HOME/services/
+RUN chown -R app:app $HOME/*
 
 USER app
-WORKDIR $HOME
+WORKDIR $HOME/services
 RUN npm install
 
 USER root
-RUN npm install -g jest
-# Bundle app source
-COPY . $HOME
-RUN chown -R app:app $HOME
+COPY . $HOME/services
+RUN chown -R app:app $HOME/*
 USER app
-
-EXPOSE 4242
 
 CMD [ "npm", "start" ]
