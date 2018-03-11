@@ -17,3 +17,4 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker info
+  - sudo chown -R 100:1001 .
