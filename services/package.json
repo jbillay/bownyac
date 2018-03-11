@@ -10,8 +10,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "jest --forceExit",
-    "lint": "./node_modules/.bin/eslint **/*.js",
-    "doc": "./node_modules/.bin/apidoc -i lib/"
+    "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "jest": {
     "testEnvironment": "node",

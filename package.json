@@ -1,0 +1,17 @@
+{
+  "name": "bownyac",
+  "version": "1.0.0",
+  "description": "Next generation of software",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbillay/bownyac.git"
+  },
+  "scripts": {
+    "doc": "./node_modules/.bin/apidoc -i services/lib/ -o docs/"
+  },
+  "author": "Jeremy Billay",
+  "license": "MIT",
+  "devDependencies": {
+    "apidoc": "^0.17.6"
+  }
+}
