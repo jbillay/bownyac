@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "test": "./node_modules/.bin/jest --forceExit",
+    "test": "jest --forceExit",
     "prestart": "./node_modules/.bin/eslint **/*.js"
   },
   "jest": {

@@ -17,6 +17,7 @@ WORKDIR $HOME
 RUN npm install
 
 USER root
+RUN npm install -g jest
 # Bundle app source
 COPY . $HOME
 RUN chown -R app:app $HOME
