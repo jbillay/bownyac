@@ -31,7 +31,7 @@ services:
       - '4242:4242' # expose ports - HOST:CONTAINER
     environment:
       - DEBUG=services:*
-      - NODE_ENVdevelopment
+      - NODE_ENV=development
 volumes:
   dbdata:
     driver: local
