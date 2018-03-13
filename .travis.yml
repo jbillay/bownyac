@@ -18,3 +18,12 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - docker info
   - sudo chown -R 100:1001 .
+after_success:
+  - sudo pip install codecov
+  - codecov
+  - sudo chown -R 2000:2000 .
+deploy:
+  provider: script
+    script: bash scripts/deploy_heroku.sh $HEROKU-TOKEN
+    on:
+      branch: master
