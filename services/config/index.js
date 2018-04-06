@@ -1,10 +1,10 @@
-const logger = require('../lib/logger');
-const common = require('./env/common');
+const logger = require('../lib/logger')
+const common = require('./env/common')
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 
-logger.log('info', `Load environment ${env} configuration`);
+logger.log('info', `Load environment ${env} configuration`)
 
-const config = require(`./env/${env}`);
+const config = require(`./env/${env}`)
 
-module.exports = Object.assign({}, common, config);
+module.exports = Object.assign({}, common, config)
