@@ -2,11 +2,11 @@
  * Created by jeremy on 29/05/2017.
  */
 
-const debug = require('debug')('services:logger');
+const winstonLogger = require('../lib/logger');
 
 // logger middleware
 
 module.exports = async function logger(ctx, next) {
+  winstonLogger.log('info', `${ctx.method} ${ctx.url}`);
   await next();
-  debug(`${ctx.method} ${ctx.url}`);
 };

@@ -1,4 +1,4 @@
-const debug = require('debug')('services:server:error');
+const logger = require('../lib/logger');
 const env = require('../config/');
 
 /**
@@ -18,7 +18,7 @@ const errorHandler = async function errorHandler(ctx, next) {
       delete ctx.body.stack;
     }
     /* istanbul ignore next */
-    debug(`Error in request: ${err}`);
+    logger.log('error', `Error in request: ${err}`);
   }
 }
 

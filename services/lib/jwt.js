@@ -12,7 +12,8 @@ function JWTErrorHandler(ctx, next) {
         error: 'Not authorized',
       };
     } else {
-      throw err;
+      /* istanbul ignore next */
+      throw new Error(err);
     }
   });
 }

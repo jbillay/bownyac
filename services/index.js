@@ -2,7 +2,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const config = require('./config/');
-const debug = require('debug')('services:server');
+const logger = require('./lib/logger');
 const koaApp = require('./lib/koa');
 
 const start = async function (config) {
@@ -22,5 +22,5 @@ const start = async function (config) {
 };
 
 start(config)
-  .then((server) => console.log('Server started'))
-  .catch((error) => console.error(`Server not started : ${error}`));
+  .then((server) => logger.log('info', 'Server started'))
+  .catch((error) => logger.log('error', `Server not started : ${error}`));
