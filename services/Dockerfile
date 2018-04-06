@@ -6,7 +6,7 @@ RUN apk add --no-cache make gcc g++ python
 RUN addgroup app -g 1001
 RUN adduser app -S /bin/false -h /home/app -G app -u 100
 
-RUN npm install --global npm
+RUN npm install --global npm@5.6.0
 
 ENV HOME=/home/app
 

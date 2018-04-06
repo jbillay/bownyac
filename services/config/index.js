@@ -1,7 +1,10 @@
 const debug = require('debug')('services:config');
+const common = require('./env/common');
 
-const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+const env = process.env.NODE_ENV || 'development';
 
 debug(`Load environment ${env} configuration`);
 
-module.exports = require(`./${env}/`);
+const config = require(`./env/${env}`);
+
+module.exports = Object.assign({}, common, config);

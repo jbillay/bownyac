@@ -23,4 +23,4 @@ const start = async function (config) {
 
 start(config)
   .then((server) => console.log('Server started'))
-  .catch((error) => console.error('Server not started'));
+  .catch((error) => console.error(`Server not started : ${error}`));
