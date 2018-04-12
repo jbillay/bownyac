@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "test": "jest --forceExit",
+    "test": "jest",
     "lint": "./node_modules/.bin/eslint --fix **/*.js && prettier --write \"**/*.js\"",
     "precommit": "lint-staged"
   },
@@ -66,10 +66,9 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add",
-      "jest --bail --findRelatedTests"
+      "eslint --fix **/*.js",
+      "prettier --write \"**/*.js\"",
+      "git add"
     ]
   },
   "dependencies": {

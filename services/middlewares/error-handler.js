@@ -1,10 +1,9 @@
-const logger = require('../lib/logger')
-const env = require('../config/')
-
 /**
  * Error handler middleware.
  * Uses status code from error if present.
  */
+const env = require('../config')
+
 const errorHandler = async function errorHandler(ctx, next) {
   try {
     await next()
@@ -18,7 +17,7 @@ const errorHandler = async function errorHandler(ctx, next) {
       delete ctx.body.stack
     }
     /* istanbul ignore next */
-    logger.log('error', `Error in request: ${err}`)
+    ctx.logger.log('error', `Error in request: ${err}`)
   }
 }
 

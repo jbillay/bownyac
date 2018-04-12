@@ -3,5 +3,6 @@ module.exports = {
   secret: 'S€cr€tB0wnY@c',
   db: 'mongodb://bownyac-db:27017/bownyac-test',
   redis: 'bownyac-session',
-  EMIT_STACK_TRACE: true
+  EMIT_STACK_TRACE: true,
+  logLevel: 'debug'
 }

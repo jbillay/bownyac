@@ -1,9 +1,8 @@
-const logger = require('../lib/logger')
 const common = require('./env/common')
 
 const env = process.env.NODE_ENV || 'development'
 
-logger.log('info', `Load environment ${env} configuration`)
+console.log('info', `Load environment ${env} configuration`)
 
 const config = require(`./env/${env}`)
 

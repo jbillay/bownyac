@@ -1,22 +1,43 @@
-const jwt = require('koa-jwt')
+const jsonwebtoken = require('jsonwebtoken')
 
-function jwtInstance(config) {
-  return jwt({ secret: config.secret })
+function resolveAuthorizationHeader(ctx) {
+  if (!ctx.header || !ctx.header.authorization) {
+    return
+  }
+  const parts = ctx.header.authorization.split(' ')
+  if (parts.length === 2) {
+    const scheme = parts[0]
+    const credentials = parts[1]
+    if (/^Bearer$/i.test(scheme)) {
+      return credentials
+    }
+  }
 }
 
-function JWTErrorHandler(ctx, next) {
-  return next().catch(err => {
-    if (err.status === 401) {
-      ctx.status = 401
-      ctx.body = {
-        error: 'Not authorized'
-      }
-    } else {
-      /* istanbul ignore next */
-      throw new Error(err)
-    }
+function asyncVerify(...args) {
+  return new Promise((resolve, reject) => {
+    jsonwebtoken.verify(...args, (error, decoded) => {
+      error ? reject(error) : resolve(decoded)
+    })
   })
 }
 
-module.exports.jwt = jwtInstance
-module.exports.errorHandler = () => JWTErrorHandler
+module.exports.jwt = async function jwtChecker(ctx, next) {
+  try {
+    const decoded = await asyncVerify(
+      resolveAuthorizationHeader(ctx),
+      ctx.config.secret
+    )
+    ctx.state.user = decoded
+    await next()
+  } catch (err) {
+    ctx.status = 401
+    ctx.body = {
+      error: 'Not authorized'
+    }
+  }
+}
+
+module.exports.issue = (payload, config) => {
+  return jsonwebtoken.sign(payload, config.secret)
+}
