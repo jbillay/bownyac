@@ -22,7 +22,7 @@ after_success:
   - sudo pip install codecov
   - codecov
   - sudo chown -R 2000:2000 .
-  - docker login --username=_ --password="$HEROKU_TOKEN" registry.heroku.com
+  - echo "$HEROKU_TOKEN" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 deploy:
   provider: script
   script: bash scripts/deploy_heroku.sh
